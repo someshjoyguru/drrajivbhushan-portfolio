@@ -22,8 +22,11 @@ jobs:
     - name: Install dependencies
       run: |
         npm install
+        npm install crypto-browserify
 
     - name: Build the React app
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
       run: |
         npm run build
 
@@ -33,16 +36,12 @@ jobs:
         EC2_HOST: ${{ secrets.HOST_DNS }}
         EC2_USER: ${{ secrets.USERNAME }}
       run: |
-        # Create build folder path to deploy the build
+        echo "$EC2_KEY_PATH" > deploy_key.pem
+        chmod 600 deploy_key.pem
         BUILD_PATH="./build/*"
-
-        # Sync the build to EC2 using scp
-        scp -i $EC2_KEY_PATH -o StrictHostKeyChecking=no -r $BUILD_PATH $EC2_USER@$EC2_HOST:/home/ubuntu/drrajivbhushan-portfolio/
-
-        # SSH into EC2 and restart Nginx
-        ssh -i $EC2_KEY_PATH -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST << 'EOF'
-          sudo systemctl restart nginx  # Restart Nginx to load the new build
-        EOF
+        scp -i deploy_key.pem -o StrictHostKeyChecking=no -r $BUILD_PATH $EC2_USER@$EC2_HOST:/home/ubuntu/drrajivbhushan-portfolio/
+        ssh -i deploy_key.pem -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo systemctl restart nginx'
+        rm -f deploy_key.pem
 
     - name: Notify Deployment Success
       run: echo "React app has been successfully deployed to EC2!"
