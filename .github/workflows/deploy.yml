@@ -22,10 +22,16 @@ jobs:
     - name: Install dependencies
       run: |
         npm install
+        npm -v
+        node -v
+        ls -la
 
     - name: Build the React app
       run: |
+        echo "Starting build process..."
         npm run build
+        echo "Build completed"
+        ls -la dist/  
 
     - name: Deploy to EC2
       env:
@@ -35,9 +41,12 @@ jobs:
       run: |
         echo "$EC2_KEY_PATH" > deploy_key.pem
         chmod 600 deploy_key.pem
-        BUILD_PATH="./build/*"
-        scp -i deploy_key.pem -o StrictHostKeyChecking=no -r $BUILD_PATH $EC2_USER@$EC2_HOST:/home/ubuntu/drrajivbhushan-portfolio/
-        ssh -i deploy_key.pem -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST 'sudo systemctl restart nginx'
+        
+        scp -i deploy_key.pem -o StrictHostKeyChecking=no -r dist/* $EC2_USER@$EC2_HOST:/home/ubuntu/drrajivbhushan-portfolio/build/
+        ssh -i deploy_key.pem -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST '
+          sudo systemctl restart nginx
+          ls -la /home/ubuntu/drrajivbhushan-portfolio/build/
+        '
         rm -f deploy_key.pem
 
     - name: Notify Deployment Success
