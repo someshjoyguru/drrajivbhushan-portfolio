@@ -13,6 +13,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/ui/card": ["src/components/ui/card"]
-    }
+    },
+    "esModuleInterop": true
   }
 }
