@@ -1,6 +1,6 @@
 import { Card, CardContent } from "./components/ui/card";
 import { Button } from "./components/ui/button";
-import { Calendar, Book, Award, Users, Globe, Star, Bookmark } from 'lucide-react';
+import { Calendar, Book, Award, Globe, Star, UserCheck, Globe2 } from 'lucide-react';
 
 
 const Portfolio = () => {
@@ -11,8 +11,8 @@ const Portfolio = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-              <span className="block">Prof. Rajiv Bhushan</span>
-              <span className="block text-blue-600 text-2xl mt-3">Distinguished Academic & Global Mentor</span>
+              <span className="block">Prof. (Dr) Rajiv Bhushan</span>
+              <span className="block text-blue-600 text-2xl mt-3">Interview Coach & Global Mentor</span>
             </h1>
             <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
               Distinguished faculty at NIT Jamshedpur with 35 years of academic excellence and global impact
@@ -34,23 +34,41 @@ const Portfolio = () => {
       <div className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <CardContent className="p-6">
+                <UserCheck className="h-8 w-8 text-blue-600 mb-4" />
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Interview Coach</h3>
+                <p className="text-gray-600">An expert Interview Coach with 10 years of experience as Head Training and Placement and 21 years as founding professor in-charge of soft skills club at NIT Jamshedpur</p>
+              </CardContent>
+            </Card>
+            <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
+              <CardContent className="p-6">
+                <Globe2 className="h-8 w-8 text-blue-600 mb-4" />
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Global Mentorship</h3>
+                <p className="text-gray-600">Mentored over 15,000 students globally, shaping careers and fostering academic excellence in India and abroad.</p>
+              </CardContent>
+            </Card>
+
             <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="p-6">
                 <Award className="h-8 w-8 text-blue-600 mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Academic Excellence</h3>
-                <p className="text-gray-600">Gold medallist and university rank holder throughout academic career. LinkedIn Top Voice in Higher Education.</p>
+                
+                <p className="text-gray-600">Gold medallist and university rank holder throughout academic career. University teaching and research in India and abraod for 33 years. LinkedIn Top Voice in Mentoring, Career Councelling, Higher Education, Team Management and Public Affairs.
+                {/* <ul className="list-disc pl-6 text-gray-600">
+                  <li>Mentoring</li>
+                  <li>Career Councelling</li>
+                  <li>Higher Education</li>
+                  <li>Team Management</li>
+                  <li>Public Affairs</li>
+                </ul> */}
+                </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-6">
-                <Users className="h-8 w-8 text-blue-600 mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Global Mentorship</h3>
-                <p className="text-gray-600">Mentored over 15,000 students globally, shaping careers and fostering academic excellence.</p>
-              </CardContent>
-            </Card>
+            
 
-            <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow">
+            <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow xl:col-start-2 xl:row-start-2">
               <CardContent className="p-6">
                 <Globe className="h-8 w-8 text-blue-600 mb-4" />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">International Experience</h3>
@@ -67,18 +85,16 @@ const Portfolio = () => {
           <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8">Areas of Expertise</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              "Sustainability",
+              "HR Interview",
+              "Training & Placement",
+              "Group Discussion",
+              "Soft Skills",
+              "Leadership & Motivation",
+              "Campus to Corporate Training",
               "Corporate Communication",
               "Business Communication",
-              "Leadership & Motivation",
-              "Soft Skills",
-              "Training & Placement",
               "Media Specialist",
-              "HR Interview Training",
-              "Group Discussion Expert",
-              "Campus to Corporate Training",
-              "English Language & Literature",
-              "PhD Supervision"
+              "English Language & Literature"
             ].map((skill, index) => (
               <div key={index} className="flex items-center p-4 bg-gray-50 rounded-lg">
                 <Star className="h-5 w-5 text-blue-600 mr-2" />
@@ -93,20 +109,12 @@ const Portfolio = () => {
       <div className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8">Research & Publications</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1">
             <Card className="bg-white shadow-lg">
               <CardContent className="p-6">
                 <Book className="h-8 w-8 text-blue-600 mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Research Experience</h3>
-                <p className="text-gray-600">Over 20 years of research experience with 40 research papers and multiple book chapters in specialized areas.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white shadow-lg">
-              <CardContent className="p-6">
-                <Bookmark className="h-8 w-8 text-blue-600 mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">PhD Supervision</h3>
-                <p className="text-gray-600">Guided numerous Post Graduate Research students and PhD candidates across multiple disciplines globally.</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Research Experience and PhD Supervision</h3>
+                <p className="text-gray-600">Over 20 years of research experience with 40 research papers and multiple book chapters in specialized areas. Guided numerous Post Graduate Research students and PhD candidates across multiple disciplines globally.</p>
               </CardContent>
             </Card>
           </div>
@@ -118,7 +126,7 @@ const Portfolio = () => {
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-              <span className="block">Ready to transform your academic journey?</span>
+              <span className="block">Ready to amplify your placement and career prospects?</span>
             </h2>
             <div className="mt-8 flex justify-center">
               <Button 
