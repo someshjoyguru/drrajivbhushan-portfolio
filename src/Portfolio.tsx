@@ -15,7 +15,7 @@ const Portfolio = () => {
               <span className="block text-blue-600 text-2xl mt-3">Interview Coach & Global Mentor</span>
             </h1>
             <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-              Distinguished faculty at NIT Jamshedpur with 35 years of academic excellence and global impact
+              Distinguished faculty at NIT Jamshedpur with 33 years of academic excellence and global impact
             </p>
             <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
               <Button 
