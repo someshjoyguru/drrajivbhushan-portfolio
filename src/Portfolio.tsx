@@ -37,6 +37,7 @@ const Portfolio = () => {
                 <Button 
                   variant="outline" 
                   className="px-8 py-6 rounded-lg text-lg font-medium border-blue-200 text-blue-700 hover:bg-blue-50 shadow-md hover:shadow-lg transition-all"
+                  onClick={() => window.open('https://www.linkedin.com/in/dr-rajiv-bhushan-34bb0729b/', '_blank')}
                 >
                   <Mail className="w-5 h-5 mr-2" />
                   Contact Me
@@ -47,7 +48,7 @@ const Portfolio = () => {
               <div className="relative">
                 <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-blue-200 to-blue-50 blur-lg opacity-75"></div>
                 <Avatar className="w-64 h-64 border-4 border-white shadow-xl">
-                  <AvatarImage src="/api/placeholder/400/400" alt="Dr. Rajiv Bhushan" />
+                  <AvatarImage src="https://www.nitjsr.ac.in/backend/uploads/Faculty/HU105/profile/profile-pic.png" alt="Dr. Rajiv Bhushan" />
                   <AvatarFallback className="bg-gradient-to-br from-blue-500 to-blue-700 text-4xl text-white">RB</AvatarFallback>
                 </Avatar>
               </div>
@@ -260,7 +261,7 @@ const Portfolio = () => {
                 Over 20 years of research experience with 40 research papers and multiple book chapters in specialized areas. Guided numerous Post Graduate Research students and PhD candidates across multiple disciplines globally.
               </p>
               
-              <div className="bg-blue-50 rounded-lg p-6">
+              {/* <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="text-lg font-medium text-blue-800 mb-4">Featured Publications</h3>
                 <ScrollArea className="h-64 rounded-md border border-blue-100 bg-white p-4">
                   <div className="space-y-6">
@@ -275,7 +276,7 @@ const Portfolio = () => {
                     ))}
                   </div>
                 </ScrollArea>
-              </div>
+              </div> */}
             </CardContent>
           </Card>
         </div>
@@ -300,13 +301,6 @@ const Portfolio = () => {
                   <Calendar className="w-5 h-5 mr-2" />
                   Book a Consultation
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="px-8 py-6 rounded-lg text-lg font-medium border-white text-white hover:bg-white/20 shadow-md hover:shadow-lg transition-all"
-                >
-                  <PhoneCall className="w-5 h-5 mr-2" />
-                  Contact Dr. Rajiv
-                </Button>
               </div>
             </div>
           </div>
@@ -314,7 +308,7 @@ const Portfolio = () => {
       </div>
       
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300">
+      {/* <footer className="bg-gray-900 text-gray-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
@@ -363,7 +357,7 @@ const Portfolio = () => {
             <p>&copy; {new Date().getFullYear()} Prof. (Dr) Rajiv Bhushan. All rights reserved.</p>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
