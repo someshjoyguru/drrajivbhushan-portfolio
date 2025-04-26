@@ -47,7 +47,7 @@ const Portfolio = () => {
                 <div className="absolute -inset-4 rounded-full"></div>
                 <Avatar className="w-64 h-64 border-white shadow-xl rounded-full">
                   <AvatarImage 
-                    src="../src/assets/profile-pic.png" 
+                    src="https://www.nitjsr.ac.in/backend/uploads/Faculty/HU105/profile/profile-pic.png" 
                     alt="Dr. Rajiv Bhushan" 
                     className="rounded-full"
                   />
