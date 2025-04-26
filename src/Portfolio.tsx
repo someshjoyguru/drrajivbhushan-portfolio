@@ -1,11 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Calendar, Book, Award, Globe, Star, UserCheck, Globe2, Mail, PhoneCall, ArrowRight, Briefcase, GraduationCap } from 'lucide-react';
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent, CardHeader, CardTitle } from "../src/components/ui/card";
+import { Button } from "../src/components/ui/button";
+import { Calendar, Book, Award, Globe, Star, UserCheck, Globe2, Mail, Briefcase, GraduationCap } from 'lucide-react';
+import { Badge } from "../src/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 
 const Portfolio = () => {
   return (
@@ -46,10 +44,14 @@ const Portfolio = () => {
             </div>
             <div className="md:w-1/3">
               <div className="relative">
-                <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-blue-200 to-blue-50 blur-lg opacity-75"></div>
-                <Avatar className="w-64 h-64 border-4 border-white shadow-xl">
-                  <AvatarImage src="https://www.nitjsr.ac.in/backend/uploads/Faculty/HU105/profile/profile-pic.png" alt="Dr. Rajiv Bhushan" />
-                  <AvatarFallback className="bg-gradient-to-br from-blue-500 to-blue-700 text-4xl text-white">RB</AvatarFallback>
+                <div className="absolute -inset-4 rounded-full"></div>
+                <Avatar className="w-64 h-64 border-white shadow-xl rounded-full">
+                  <AvatarImage 
+                    src="../src/assets/profile-pic.png" 
+                    alt="Dr. Rajiv Bhushan" 
+                    className="rounded-full"
+                  />
+                  <AvatarFallback className="bg-gradient-to-br from-blue-500 to-blue-700 text-4xl text-white rounded-full">RB</AvatarFallback>
                 </Avatar>
               </div>
             </div>
