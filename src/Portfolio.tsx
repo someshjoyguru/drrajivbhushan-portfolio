@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, Book, Award, Globe, Star, UserCheck, Globe2, Mail, PhoneCall, ArrowRight, Briefcase, GraduationCap } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
