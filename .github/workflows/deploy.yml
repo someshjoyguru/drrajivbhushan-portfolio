@@ -8,46 +8,85 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
-
+      uses: actions/checkout@v3
+      
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: '18'
-        cache: 'npm'
-
+        # Disable the problematic caching mechanism
+        
     - name: Install dependencies
       run: |
-        npm install
+        npm ci
         npm -v
         node -v
         ls -la
-
+        
     - name: Build the React app
       run: |
         echo "Starting build process..."
         npm run build
         echo "Build completed"
-        ls -la dist/  
-
+        ls -la dist/ || ls -la build/
+        
+    - name: Setup SSH key
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
+        
     - name: Deploy to EC2
       env:
-        EC2_KEY_PATH: ${{ secrets.EC2_SSH_KEY }}
         EC2_HOST: ${{ secrets.HOST_DNS }}
         EC2_USER: ${{ secrets.USERNAME }}
       run: |
-        echo "$EC2_KEY_PATH" > deploy_key.pem
-        chmod 600 deploy_key.pem
+        # Create SSH config to avoid StrictHostKeyChecking
+        cat > ~/.ssh/config << EOF
+        Host ec2
+          HostName $EC2_HOST
+          User $EC2_USER
+          IdentityFile ~/.ssh/deploy_key
+          StrictHostKeyChecking no
+        EOF
+        chmod 600 ~/.ssh/config
         
-        scp -i deploy_key.pem -o StrictHostKeyChecking=no -r dist/* $EC2_USER@$EC2_HOST:/home/ubuntu/drrajivbhushan-portfolio/build/
-        ssh -i deploy_key.pem -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST '
-          sudo systemctl restart nginx
-          ls -la /home/ubuntu/drrajivbhushan-portfolio/build/
-        '
-        rm -f deploy_key.pem
-
-    - name: Notify Deployment Success
-      run: echo "React app has been successfully deployed to EC2!"
+        # Check if dist or build directory exists
+        if [ -d "dist" ]; then
+          BUILD_DIR="dist"
+        elif [ -d "build" ]; then
+          BUILD_DIR="build"
+        else
+          echo "Neither dist nor build directory found!"
+          exit 1
+        fi
+        
+        # Create directory if it doesn't exist
+        ssh ec2 'mkdir -p /home/ubuntu/drrajivbhushan-portfolio/build/'
+        
+        # Copy files
+        echo "Copying files from $BUILD_DIR to EC2..."
+        rsync -avz --delete $BUILD_DIR/* ec2:/home/ubuntu/drrajivbhushan-portfolio/build/
+        
+        # Restart Nginx
+        echo "Restarting Nginx..."
+        ssh ec2 'sudo systemctl restart nginx && ls -la /home/ubuntu/drrajivbhushan-portfolio/build/'
+        
+    - name: Cleanup
+      if: always()
+      run: |
+        rm -rf ~/.ssh/deploy_key ~/.ssh/config
+        
+    - name: Notify Deployment Status
+      if: ${{ success() }}
+      run: |
+        echo "✅ React app has been successfully deployed to EC2!"
+        
+    - name: Notify Deployment Failure
+      if: ${{ failure() }}
+      run: |
+        echo "❌ Deployment failed! Check the logs for details."
